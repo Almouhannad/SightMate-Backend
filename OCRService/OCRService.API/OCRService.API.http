@@ -1,0 +1,6 @@
+@OCRService.API_HostAddress = http://localhost:9911
+
+GET {{OCRService.API_HostAddress}}/health/
+Accept: application/json
+
+###
