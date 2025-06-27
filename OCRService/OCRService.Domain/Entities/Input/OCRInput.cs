@@ -24,8 +24,7 @@ public class OCRInput
             return Result<OCRInput>.ValidationFailure(OCRInputValidationErrors.NotSupportedModel);
         }
 
-        var supportedLanguages = OCRLanguages.SupportedOCRLanguages;
-        if (!supportedLanguages.Contains(options.Language))
+        if (!OCRLanguages.OCRSupportedLanguagesMap.TryGetValue(options.Language.Code, out var _))
         {
             return Result<OCRInput>.ValidationFailure(OCRInputValidationErrors.NotSupportedLanguage);
         }
