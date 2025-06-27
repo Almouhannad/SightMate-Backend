@@ -1,4 +1,4 @@
-﻿namespace SharedKernel;
+﻿namespace SharedKernel.Base;
 
 public sealed record ValidationError : Error
 {

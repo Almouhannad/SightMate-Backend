@@ -1,7 +1,8 @@
 ﻿using OCRService.Domain.Entities.Input.Options;
 using OCRService.Domain.Entities.Input.Options.Language;
 using OCRService.Domain.Entities.Input.Options.Model;
-using SharedKernel;
+using SharedKernel.Base;
+using SharedKernel.Multimedia;
 
 namespace OCRService.Domain.Entities.Input;
 

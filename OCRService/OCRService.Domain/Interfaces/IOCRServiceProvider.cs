@@ -1,6 +1,6 @@
 ﻿using OCRService.Domain.Entities.Input;
 using OCRService.Domain.Entities.Output;
-using SharedKernel;
+using SharedKernel.Base;
 
 namespace OCRService.Domain.Interfaces;
 

@@ -1,4 +1,4 @@
-﻿using SharedKernel;
+﻿using SharedKernel.Base;
 
 namespace OCRService.Domain.Entities.Input;
 
