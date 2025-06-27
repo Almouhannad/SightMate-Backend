@@ -5,9 +5,9 @@ using SharedKernel.Messaging;
 
 namespace SharedKernel.Behaviors;
 
-internal static class ValidationDecorator
+public static class ValidationDecorator
 {
-    internal sealed class CommandHandler<TCommand, TResponse>(
+    public sealed class CommandHandler<TCommand, TResponse>(
         ICommandHandler<TCommand, TResponse> innerHandler,
         IEnumerable<IValidator<TCommand>> validators)
         : ICommandHandler<TCommand, TResponse>
@@ -26,7 +26,7 @@ internal static class ValidationDecorator
         }
     }
 
-    internal sealed class CommandBaseHandler<TCommand>(
+    public sealed class CommandBaseHandler<TCommand>(
         ICommandHandler<TCommand> innerHandler,
         IEnumerable<IValidator<TCommand>> validators)
         : ICommandHandler<TCommand>

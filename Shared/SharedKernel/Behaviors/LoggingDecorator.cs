@@ -2,9 +2,11 @@
 using Microsoft.Extensions.Logging;
 using SharedKernel.Messaging;
 
-internal static class LoggingDecorator
+namespace SharedKernel.Behaviors;
+
+public static class LoggingDecorator
 {
-    internal sealed class CommandHandler<TCommand, TResponse>(
+    public sealed class CommandHandler<TCommand, TResponse>(
         ICommandHandler<TCommand, TResponse> innerHandler,
         ILogger<CommandHandler<TCommand, TResponse>> logger)
         : ICommandHandler<TCommand, TResponse>
@@ -34,7 +36,7 @@ internal static class LoggingDecorator
         }
     }
 
-    internal sealed class CommandBaseHandler<TCommand>(
+    public sealed class CommandBaseHandler<TCommand>(
         ICommandHandler<TCommand> innerHandler,
         ILogger<CommandBaseHandler<TCommand>> logger)
         : ICommandHandler<TCommand>
@@ -64,7 +66,7 @@ internal static class LoggingDecorator
         }
     }
 
-    internal sealed class QueryHandler<TQuery, TResponse>(
+    public sealed class QueryHandler<TQuery, TResponse>(
         IQueryHandler<TQuery, TResponse> innerHandler,
         ILogger<QueryHandler<TQuery, TResponse>> logger)
         : IQueryHandler<TQuery, TResponse>
