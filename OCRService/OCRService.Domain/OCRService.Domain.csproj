@@ -10,8 +10,4 @@
     <ProjectReference Include="..\..\Shared\SharedKernel\SharedKernel.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\Output\" />
-  </ItemGroup>
-
 </Project>
