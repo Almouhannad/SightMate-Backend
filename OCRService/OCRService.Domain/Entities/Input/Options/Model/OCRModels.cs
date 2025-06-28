@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using OCRService.Domain.Entities.Input.Options.Language;
+using System.Collections.ObjectModel;
 
 namespace OCRService.Domain.Entities.Input.Options.Model;
 
@@ -13,7 +14,14 @@ public static class OCRModels
     private static readonly String _gemma = "gemma";
     public static String GEMMA => _gemma;
 
-    public static readonly ReadOnlyCollection<String> SupportedOCRModels =
-        new([_easyocr, _paddleocr, _gemma]);
+    public static readonly ReadOnlyDictionary<String, String> OCRSupportedModelsMap =
+        new(
+            new Dictionary<string, String>(StringComparer.OrdinalIgnoreCase)
+            {
+                    { _easyocr, _easyocr },
+                    { _paddleocr, _paddleocr },
+                    { _gemma, _gemma }
+            }
+        );
 
 }
