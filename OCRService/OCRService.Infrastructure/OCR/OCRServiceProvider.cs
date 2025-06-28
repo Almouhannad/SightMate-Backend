@@ -15,7 +15,7 @@ public class OCRServiceProvider : IOCRServiceProvider
     private String _ocrServiceApiKey = CONFIG.OCRServiceApiKey;
     private Error _serviceError = new ("OCR.SERVICE_ERROR",
         "An error occurred while processing OCR request, please try again later",
-        ErrorType.Problem);
+        ErrorType.Conflict);
 
     private readonly HttpClient _http;
     private readonly JsonSerializerOptions _jsonOptions = new()
