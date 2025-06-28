@@ -8,6 +8,13 @@ namespace OCRService.Presentation;
 
 public static class DependencyInjection
 {
+    public static IServiceCollection AddPresentation(this IServiceCollection services)
+    {
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddProblemDetails();
+
+        return services;
+    }
     public static IServiceCollection AddEndpoints(this IServiceCollection services)
     {
         var assembly = typeof(DependencyInjection).Assembly;
