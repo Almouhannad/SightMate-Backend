@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36221.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VQAService.Config", "VQAService.Config.csproj", "{64DE7805-C3F5-424F-8028-6E64F830C026}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64DE7805-C3F5-424F-8028-6E64F830C026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64DE7805-C3F5-424F-8028-6E64F830C026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64DE7805-C3F5-424F-8028-6E64F830C026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64DE7805-C3F5-424F-8028-6E64F830C026}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E8B9CB0B-6F05-42F1-83A4-97900565EDB7}
+	EndGlobalSection
+EndGlobal

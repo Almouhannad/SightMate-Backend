@@ -1,0 +1,6 @@
+@VQAService.API_HostAddress = http://localhost:9912
+
+GET {{VQAService.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -8,3 +8,12 @@ services:
       - OCRService/.env
     ports:
       - "9911:8080" # Maps host port 9911 to container port 8080
+  vqaservice.api:
+    image: ${DOCKER_REGISTRY-}vqaserviceapi
+    build:
+      context: .
+      dockerfile: VQAService/VQAService.API/Dockerfile
+    env_file:
+      - VQAService/.env
+    ports:
+      - "9912:8080" # Maps host port 9911 to container port 8080
