@@ -16,4 +16,34 @@ services:
     env_file:
       - VQAService/.env
     ports:
-      - "9912:8080" # Maps host port 9911 to container port 8080
+      - "9912:8080"
+  vqa_database:
+    image: mongo:6.0
+    env_file:
+      - VQAService/.env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_ROOT_USERNAME}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_ROOT_PASSWORD}"
+      MONGO_INITDB_DATABASE:      "${MONGO_DATABASE}"
+    volumes:
+      - vqa-data:/data/db
+
+  vqa_database_ui:
+    image: mongo-express:1.0.0
+    env_file:
+      - VQAService/.env
+    depends_on:
+      - vqa_database
+    ports:
+      - "9812:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER:          vqa_database
+      ME_CONFIG_MONGODB_PORT:            27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME:   "${MONGO_ROOT_USERNAME}"
+      ME_CONFIG_MONGODB_ADMINPASSWORD:   "${MONGO_ROOT_PASSWORD}"
+      ME_CONFIG_MONGODB_AUTH_DATABASE:   admin
+      ME_CONFIG_BASICAUTH_USERNAME:      "${ME_USERNAME}"
+      ME_CONFIG_BASICAUTH_PASSWORD:      "${ME_PASSWORD}"
+
+volumes:
+  vqa-data:
