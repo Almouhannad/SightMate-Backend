@@ -1,5 +1,4 @@
-﻿using OCRService.Domain.Entities.Input.Options.Language;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace OCRService.Domain.Entities.Input.Options.Model;
 
