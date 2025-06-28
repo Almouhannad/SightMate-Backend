@@ -1,5 +1,6 @@
 using OCRService.Application;
 using OCRService.Infrastructure;
+using OCRService.Presentation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,9 +10,13 @@ builder.Services
     .AddApplication()
     .AddInfrastructure();
 
+
+builder.Services.AddEndpoints();
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+app.MapEndpoints();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -22,11 +27,5 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/openapi/v1.json", "OpenAPI V1");
     });
 }
-
-app.MapGet("/health", () =>
-{
-    return Results.Ok(new { status = "ok" });
-})
-.WithName("GetHealth");
 
 app.Run();

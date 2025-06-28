@@ -12,11 +12,11 @@ internal sealed class CheckHealth : IEndpoint
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapGet("health", async
-            (CheckHealthQuery query,
-            IQueryHandler<CheckHealthQuery,CheckHealthQueryResponse> handler,
+            (IQueryHandler<CheckHealthQuery,CheckHealthQueryResponse> handler,
             CancellationToken cancellationToken) =>
         {
-            var result = await handler.Handle(query, cancellationToken);
+            var checkHealthQuery = new CheckHealthQuery();
+            var result = await handler.Handle(checkHealthQuery, cancellationToken);
             return result.Match(Results.Ok, CustomResults.Problem);
         })
             .WithTags(Tags.HEALTH);

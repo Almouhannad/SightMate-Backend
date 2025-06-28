@@ -18,9 +18,14 @@ internal sealed class ProcessOCRQueryHandler(IOCRServiceProvider serviceProvider
         var options = new OCROptions();
         options.Describe = query.Describe ?? options.Describe;
         options.Model = query.Model ?? options.Model;
-        if (query.LanguageCode is not null
-            && OCRLanguages.OCRSupportedLanguagesMap.TryGetValue(query.LanguageCode, out var lang))
-            options.Language = lang;
+        if (query.LanguageCode is not null)
+        {
+            if (OCRLanguages.OCRSupportedLanguagesMap.TryGetValue(query.LanguageCode, out var lang))
+            {
+                options.Language = lang;
+            }
+            else return Result.Failure<ProcessOCRQueryResponse>(OCRInputValidationErrors.NotSupportedLanguage);
+        }
 
         var createInputResult = OCRInput.Create(image, options);
         if (createInputResult.IsFailure)

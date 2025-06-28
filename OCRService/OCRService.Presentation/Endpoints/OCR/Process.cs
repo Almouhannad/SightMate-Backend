@@ -11,7 +11,7 @@ internal sealed class ProcessOCR : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet("ocr", async
+        app.MapPost("ocr", async
             (ProcessOCRQuery query,
             IQueryHandler<ProcessOCRQuery, ProcessOCRQueryResponse> handler,
             CancellationToken cancellationToken) =>
