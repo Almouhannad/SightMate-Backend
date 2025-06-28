@@ -4,5 +4,7 @@ services:
     build:
       context: .
       dockerfile: OCRService/OCRService.API/Dockerfile
+    env_file:
+      - OCRService/.env
     ports:
       - "9911:8080" # Maps host port 9911 to container port 8080

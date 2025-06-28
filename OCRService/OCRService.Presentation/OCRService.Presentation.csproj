@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\SharedKernel\SharedKernel.csproj" />
     <ProjectReference Include="..\OCRService.Application\OCRService.Application.csproj" />
+    <ProjectReference Include="..\OCRService.Config\OCRService.Config.csproj" />
     <ProjectReference Include="..\OCRService.Domain\OCRService.Domain.csproj" />
   </ItemGroup>
 
