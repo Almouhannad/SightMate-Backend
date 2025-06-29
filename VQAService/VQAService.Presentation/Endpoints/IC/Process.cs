@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Routing;
 using SharedKernel.API;
 using SharedKernel.Messaging;
 using VQAService.Application.IC;
+using VQAService.Domain.Entities.Output;
 
 namespace VQAService.Presentation.Endpoints.IC;
 
@@ -13,7 +14,7 @@ internal sealed class ProcssIC : IEndpoint
     {
         app.MapPost("ic", async
             (ProcessICQuery query,
-            IQueryHandler<ProcessICQuery, ProcessICQueryResponse> handler,
+            IQueryHandler<ProcessICQuery, ICOutput> handler,
             CancellationToken cancellationToken) =>
         {
             var result = await handler.Handle(query, cancellationToken);

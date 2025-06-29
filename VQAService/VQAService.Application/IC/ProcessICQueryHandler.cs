@@ -12,9 +12,9 @@ namespace VQAService.Application.IC;
 
 internal sealed class ProcessICQueryHandler(
     IVQAServiceProvider serviceProvider,
-    IConversationsRepository conversationsRepository) : IQueryHandler<ProcessICQuery, ProcessICQueryResponse>
+    IConversationsRepository conversationsRepository) : IQueryHandler<ProcessICQuery, ICOutput>
 {
-    public async Task<Result<ProcessICQueryResponse>> Handle(ProcessICQuery query, CancellationToken cancellationToken)
+    public async Task<Result<ICOutput>> Handle(ProcessICQuery query, CancellationToken cancellationToken)
     {
         #region Process inputs
         var image = new Image { Bytes = query.ImageBytes, Metadata = query.ImageMetadata };
@@ -30,7 +30,7 @@ internal sealed class ProcessICQueryHandler(
         var createInputResult = ICInput.Create(image, options);
         if (createInputResult.IsFailure)
         {
-            return Result.Failure<ProcessICQueryResponse>(createInputResult.Error);
+            return Result.Failure<ICOutput>(createInputResult.Error);
         }
         var icInput = createInputResult.Value;
         #endregion
@@ -39,7 +39,7 @@ internal sealed class ProcessICQueryHandler(
         var isServiceAvailable = await serviceProvider.IsAvailable();
         if (!isServiceAvailable)
         {
-            return Result.Failure<ProcessICQueryResponse>(
+            return Result.Failure<ICOutput>(
                 new Error("VQA.SERVICE_NOT_AVAILABLE", "VQA service is not available currently", ErrorType.Conflict)
                 );
         }
@@ -49,25 +49,26 @@ internal sealed class ProcessICQueryHandler(
         var processICResult = await serviceProvider.ProcessIC(icInput.Image);
         if (processICResult.IsFailure)
         {
-            return Result.Failure<ProcessICQueryResponse>(processICResult.Error);
+            return Result.Failure<ICOutput>(processICResult.Error);
         }
         var icOutput = processICResult.Value;
         #endregion
 
         #region Create conversation
         // TODO: Handle UserId
-        Conversation conversation = new() { Id = Guid.NewGuid(), UserId = Guid.NewGuid(), Image = icInput.Image, History = [] };
+        var history = new HistoryItem { Question = "Caption this image", Answer = icOutput };
+        Conversation conversation = new() { Id = Guid.NewGuid(), UserId = Guid.NewGuid(), Image = icInput.Image, History = [history] };
         var createConversationResult = await conversationsRepository.Create(conversation);
         if (createConversationResult.IsFailure)
         {
-            return Result.Failure<ProcessICQueryResponse>(createConversationResult.Error);
+            return Result.Failure<ICOutput>(createConversationResult.Error);
 
         }
         conversation = createConversationResult.Value;
         #endregion
 
         var result = new ICOutput { Caption = icOutput, ConversationId = conversation.Id };
-        return new ProcessICQueryResponse() { ICOutput = result };
+        return result;
 
     }
 }
