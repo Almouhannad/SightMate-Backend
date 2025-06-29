@@ -5,7 +5,8 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "ocrservice.api": "StartDebugging",
-        "vqaservice.api": "StartDebugging"
+        "vqaservice.api": "StartDebugging",
+        "gateway.api": "StartDebugging"
       }
     }
   }

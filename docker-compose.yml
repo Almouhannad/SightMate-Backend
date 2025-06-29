@@ -43,3 +43,11 @@ services:
       ME_CONFIG_MONGODB_AUTH_DATABASE:   "${VQA_DATABASE_AUTH_DATABASE}"
       ME_CONFIG_BASICAUTH_USERNAME:      "${VQA_DATABASE_ME_USERNAME}"
       ME_CONFIG_BASICAUTH_PASSWORD:      "${VQA_DATABASE_ME_PASSWORD}"
+  gateway.api:
+    image: ${DOCKER_REGISTRY-}gatewayapi
+    build:
+      context: .
+      dockerfile: Gateway/Gateway.API/Dockerfile
+    ports:
+      - "9990:8080"
+

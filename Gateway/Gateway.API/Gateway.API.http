@@ -1,0 +1,6 @@
+@Gateway.API_HostAddress = http://localhost:9990
+
+GET {{Gateway.API_HostAddress}}/health/
+Accept: application/json
+
+###
