@@ -6,6 +6,14 @@ services:
       dockerfile: OCRService/OCRService.API/Dockerfile
     env_file:
       - OCRService/.env
+  # ocrservice.api2:
+  #   image: ${DOCKER_REGISTRY-}ocrserviceapi
+  #   build:
+  #     context: .
+  #     dockerfile: OCRService/OCRService.API/Dockerfile
+  #   env_file:
+  #     - OCRService/.env 
+
   vqaservice.api:
     image: ${DOCKER_REGISTRY-}vqaserviceapi
     build:

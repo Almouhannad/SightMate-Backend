@@ -3,6 +3,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
+  # ocrservice.api2:
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_HTTP_PORTS=8080
 
   vqaservice.api:
     environment:
