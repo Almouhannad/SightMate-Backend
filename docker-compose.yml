@@ -6,8 +6,14 @@ services:
       dockerfile: OCRService/OCRService.API/Dockerfile
     env_file:
       - OCRService/.env
-    ports:
-      - "9911:8080" # Maps host port 9911 to container port 8080
+  # ocrservice.api2:
+  #   image: ${DOCKER_REGISTRY-}ocrserviceapi
+  #   build:
+  #     context: .
+  #     dockerfile: OCRService/OCRService.API/Dockerfile
+  #   env_file:
+  #     - OCRService/.env 
+
   vqaservice.api:
     image: ${DOCKER_REGISTRY-}vqaserviceapi
     build:
@@ -15,8 +21,14 @@ services:
       dockerfile: VQAService/VQAService.API/Dockerfile
     env_file:
       - VQAService/.env
-    ports:
-      - "9912:8080"
+  # vqaservice.api2:
+  #   image: ${DOCKER_REGISTRY-}vqaserviceapi
+  #   build:
+  #     context: .
+  #     dockerfile: VQAService/VQAService.API/Dockerfile
+  #   env_file:
+  #     - VQAService/.env
+
   vqa_database:
     image: mongo:6.0
     env_file:
@@ -43,3 +55,11 @@ services:
       ME_CONFIG_MONGODB_AUTH_DATABASE:   "${VQA_DATABASE_AUTH_DATABASE}"
       ME_CONFIG_BASICAUTH_USERNAME:      "${VQA_DATABASE_ME_USERNAME}"
       ME_CONFIG_BASICAUTH_PASSWORD:      "${VQA_DATABASE_ME_PASSWORD}"
+  gateway.api:
+    image: ${DOCKER_REGISTRY-}gatewayapi
+    build:
+      context: .
+      dockerfile: Gateway/Gateway.API/Dockerfile
+    ports:
+      - "9990:8080"
+
