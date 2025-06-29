@@ -21,6 +21,14 @@ services:
       dockerfile: VQAService/VQAService.API/Dockerfile
     env_file:
       - VQAService/.env
+  # vqaservice.api2:
+  #   image: ${DOCKER_REGISTRY-}vqaserviceapi
+  #   build:
+  #     context: .
+  #     dockerfile: VQAService/VQAService.API/Dockerfile
+  #   env_file:
+  #     - VQAService/.env
+
   vqa_database:
     image: mongo:6.0
     env_file:
