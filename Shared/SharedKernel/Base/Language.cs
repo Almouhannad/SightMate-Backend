@@ -1,11 +1,11 @@
-﻿namespace OCRService.Domain.Entities.Input.Options.Language;
+﻿namespace SharedKernel.Base;
 
-public class OCRLanguage
+public class Language
 {
     public String Name { get; init; }
     public String Code { get; init; }
 
-    public OCRLanguage(String name, String code)
+    public Language(String name, String code)
     {
         if (string.IsNullOrWhiteSpace(name))
         {

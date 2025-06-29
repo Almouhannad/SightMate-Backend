@@ -4,7 +4,8 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "ocrservice.api": "StartDebugging"
+        "ocrservice.api": "StartDebugging",
+        "vqaservice.api": "StartDebugging"
       }
     }
   }
