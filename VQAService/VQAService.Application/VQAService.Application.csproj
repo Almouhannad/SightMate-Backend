@@ -12,4 +12,8 @@
     <ProjectReference Include="..\VQAService.Domain\VQAService.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Scrutor" Version="6.1.0" />
+  </ItemGroup>
+
 </Project>
