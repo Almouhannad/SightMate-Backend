@@ -69,6 +69,10 @@ services:
     build:
       context: .
       dockerfile: Gateway/Gateway.API/Dockerfile
+    environment:
+      JWT_SECRET_KEY:    "${JWT_SECRET_KEY}"
+      JWT_ISSUER:        "${JWT_ISSUER}"
+      JWT_AUDIENCE:      "${JWT_AUDIENCE}"
     ports:
       - "9990:8080"
 
@@ -83,6 +87,10 @@ services:
       dockerfile: IdentityService/IdentityService.API/Dockerfile
     env_file:
       - IdentityService/.env
+    environment:
+      JWT_SECRET_KEY:    "${JWT_SECRET_KEY}"
+      JWT_ISSUER:        "${JWT_ISSUER}"
+      JWT_AUDIENCE:      "${JWT_AUDIENCE}"
     ports:
       - "9989:8080" # Remove after developement 
 

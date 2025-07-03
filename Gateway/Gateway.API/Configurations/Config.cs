@@ -1,19 +1,15 @@
 ﻿using SharedKernel.Config;
 
-namespace IdentityService.API.Configurations;
+namespace Gateway.API.Configurations;
 
 public static class CONFIG
 {
     // Env-var names
-    private const string ConnectionStringVar = "CONNECTION_STRING";
     private const string JWTSecretKeyVar = "JWT_SECRET_KEY";
     private const string JWTIssuerVar = "JWT_ISSUER";
     private const string JWTAudienceVar = "JWT_AUDIENCE";
 
     // Lazy, exception-safe properties
-    private static readonly Lazy<String> _connectionString = new(() => ENVHelper.GetEnv(ConnectionStringVar));
-    public static String ConnectionString => _connectionString.Value;
-
     private static readonly Lazy<String> _jwtSecretKey = new(() => ENVHelper.GetEnv(JWTSecretKeyVar));
     public static String JWTSecretKey => _jwtSecretKey.Value;
 
