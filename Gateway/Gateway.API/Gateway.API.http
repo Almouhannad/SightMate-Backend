@@ -1,6 +1,20 @@
 @Gateway.API_HostAddress = http://localhost:9990
+@AccessToken = ''
 
 GET {{Gateway.API_HostAddress}}/health/
 Accept: application/json
-
 ###
+
+GET {{Gateway.API_HostAddress}}/ocr-api/health/
+Accept: application/json
+Authorization: Bearer {{AccessToken}}
+###
+
+GET {{Gateway.API_HostAddress}}/vqa-api/health/
+Accept: application/json
+Authorization: Bearer {{AccessToken}}
+###
+
+GET {{Gateway.API_HostAddress}}/identity-api/health/
+Accept: application/json
+Authorization: Bearer {{AccessToken}}
