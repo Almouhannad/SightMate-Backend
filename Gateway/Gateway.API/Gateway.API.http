@@ -1,5 +1,5 @@
 @Gateway.API_HostAddress = http://localhost:9990
-@AccessToken = ''
+@AccessToken = CfDJ8MZwzR2URTpAnMFIecrKytRP33bU0elThPW1l7rSOp4fNBRALRJ5WGhIQdZ8bOuhhHo4dp20xTpbYKwz0aUcA2FvJ6H97DDXK07UVJTY9VORMrgE_s5XX70vA6C4F0hQLnU3igxn9_nXfbXzIdg6OV3y1gJOC7viw2-T5pi0AsEyuhZekxq6dm5GQTqMiZuhcejwnRHIiC_rykqjgykzpB18aGDRkobkyticSpToGCy6a8vl1ULhXRaq6_28XR_NvCni_iT_-e6uy_ipCvaO_mEBESsG0Enbk1vKzyPl5KbHMyWF9utgm6siGKOULm7l8DczunF_0_Dvcr0iKKkeEkoaAa4wo7LM8w9aw_YmdEZP2USaAj24Kj5s_eICvIQ0_Uksb2TPB_aJ_MzUk8uri05FbzgIhI-Sotugjt0a_Ab_HTJSXa1wNRg1WKo00-A6g2J_3Xz8LT4bx4dF04eEKU-sWLdg1XqXPWEUgJyaoM61t_V9XGwjZ5iQ2w-jN7nJ5wychlaZ_hZldcSdKIz_WVaHr53RJqQ5ZUY8uvM3VB57p465Gazi3qOUHlImgwCTJmCf-xUDmxvNJ5wTIIiioFS2lRfgdFa6KXGJZ-bZUu9tTlfksCtB4jrNgXr0pLKJ77ST_hgMBz3m23cBuYOFVO2tME5QxhuLdGTqHIIBWLvE
 
 GET {{Gateway.API_HostAddress}}/health/
 Accept: application/json
@@ -15,6 +15,6 @@ Accept: application/json
 Authorization: Bearer {{AccessToken}}
 ###
 
-GET {{Gateway.API_HostAddress}}/identity-api/health/
+GET {{Gateway.API_HostAddress}}/identity-api/users/me
 Accept: application/json
 Authorization: Bearer {{AccessToken}}
