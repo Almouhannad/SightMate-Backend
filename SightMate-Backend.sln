@@ -27,6 +27,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCRService.Config", "OCRService\OCRService.Config\OCRService.Config.csproj", "{7773ABC4-F579-B0BC-5429-4B1CF40D1ED0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VQAService", "VQAService", "{D373E46E-FAC0-4EE1-B45A-6BD7E582E7C5}"
+	ProjectSection(SolutionItems) = preProject
+		VQAService\.env = VQAService\.env
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VQAService.API", "VQAService\VQAService.API\VQAService.API.csproj", "{74AEC53E-C374-BBED-8292-92413F79C1A2}"
 EndProject
@@ -44,7 +47,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{1942
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.API", "Gateway\Gateway.API\Gateway.API.csproj", "{45FF5A82-1E95-9DBF-4A6B-852FC6674608}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdenttiyService", "IdenttiyService", "{A435C6BF-860F-49BB-B449-1D550866B318}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityService", "IdentityService", "{A435C6BF-860F-49BB-B449-1D550866B318}"
+	ProjectSection(SolutionItems) = preProject
+		IdentityService\.env = IdentityService\.env
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService.API", "IdentityService\IdentityService.API\IdentityService.API.csproj", "{57026528-2641-2859-47F9-9F477CC789D5}"
 EndProject

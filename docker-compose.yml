@@ -1,6 +1,8 @@
 services:
+# OCR SERVICE
   ocrservice.api:
     image: ${DOCKER_REGISTRY-}ocrserviceapi
+    container_name: ocr_service_api
     build:
       context: .
       dockerfile: OCRService/OCRService.API/Dockerfile
@@ -14,8 +16,10 @@ services:
   #   env_file:
   #     - OCRService/.env 
 
+# VQA SERVICE
   vqaservice.api:
     image: ${DOCKER_REGISTRY-}vqaserviceapi
+    container_name: vqa_service_api
     build:
       context: .
       dockerfile: VQAService/VQAService.API/Dockerfile
@@ -31,6 +35,7 @@ services:
 
   vqa_database:
     image: mongo:6.0
+    container_name: vqa_service_database
     env_file:
       - VQAService/.env
     environment:
@@ -43,6 +48,7 @@ services:
 
   vqa_database_ui:
     image: mongo-express:1.0.0
+    container_name: vqa_service_database_ui
     depends_on:
       - vqa_database
     ports:
@@ -55,20 +61,45 @@ services:
       ME_CONFIG_MONGODB_AUTH_DATABASE:   "${VQA_DATABASE_AUTH_DATABASE}"
       ME_CONFIG_BASICAUTH_USERNAME:      "${VQA_DATABASE_ME_USERNAME}"
       ME_CONFIG_BASICAUTH_PASSWORD:      "${VQA_DATABASE_ME_PASSWORD}"
+
+# API-GATEWAY
   gateway.api:
     image: ${DOCKER_REGISTRY-}gatewayapi
+    container_name: gateway_api
     build:
       context: .
       dockerfile: Gateway/Gateway.API/Dockerfile
     ports:
       - "9990:8080"
 
-
+# IDENTITY SERVICE
   identityservice.api:
     image: ${DOCKER_REGISTRY-}identityserviceapi
+    container_name: identity_service_api
     build:
       context: .
       dockerfile: IdentityService/IdentityService.API/Dockerfile
+    env_file:
+      - IdentityService/.env
     ports:
-      - "9989:8080" # Remove after developement
+      - "9989:8080" # Remove after developement 
 
+  identity_database:
+    image: postgres:17
+    container_name: identity_service_database
+    environment:
+        POSTGRES_DB:         "${IDENTITY_DATABASE_NAME}"
+        POSTGRES_USER:       "${IDENTITY_DATABASE_USER}"
+        POSTGRES_PASSWORD:   "${IDENTITY_DATABASE_PASSWORD}"
+    volumes:
+      - ./IdentityService/.docker/identity_data:/var/lib/postgresql/data
+  identity_database_ui:
+    image: dpage/pgadmin4:latest
+    container_name: identity_service_database_ui
+    environment:
+      PGADMIN_DEFAULT_EMAIL:    "${IDENTITY_DATABASE_UI_EMAIL}"
+      PGADMIN_DEFAULT_PASSWORD: "${IDENTITY_DATABASE_UI_PASSWORD}"
+    ports:
+      - "5050:80"
+    depends_on:
+      - identity_database
