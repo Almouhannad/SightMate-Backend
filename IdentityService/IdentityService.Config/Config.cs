@@ -1,6 +1,6 @@
 ﻿using SharedKernel.Config;
 
-namespace IdentityService.API.Configurations;
+namespace IdentityService.Config;
 
 public static class CONFIG
 {

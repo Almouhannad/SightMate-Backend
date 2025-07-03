@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\SharedKernel\SharedKernel.csproj" />
+    <ProjectReference Include="..\IdentityService.Config\IdentityService.Config.csproj" />
   </ItemGroup>
 
 </Project>

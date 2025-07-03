@@ -54,6 +54,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityService", "Identity
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService.API", "IdentityService\IdentityService.API\IdentityService.API.csproj", "{57026528-2641-2859-47F9-9F477CC789D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService.Config", "IdentityService\IdentityService.Config\IdentityService.Config.csproj", "{41A04B14-0889-328C-45FF-EAA8A56AABFB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,6 +126,10 @@ Global
 		{57026528-2641-2859-47F9-9F477CC789D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57026528-2641-2859-47F9-9F477CC789D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57026528-2641-2859-47F9-9F477CC789D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41A04B14-0889-328C-45FF-EAA8A56AABFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41A04B14-0889-328C-45FF-EAA8A56AABFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41A04B14-0889-328C-45FF-EAA8A56AABFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41A04B14-0889-328C-45FF-EAA8A56AABFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +151,7 @@ Global
 		{E3C45503-AB72-279C-1F7D-B996A87CD569} = {D373E46E-FAC0-4EE1-B45A-6BD7E582E7C5}
 		{45FF5A82-1E95-9DBF-4A6B-852FC6674608} = {1942DD76-040F-4A11-AF42-18AF52C1AB53}
 		{57026528-2641-2859-47F9-9F477CC789D5} = {A435C6BF-860F-49BB-B449-1D550866B318}
+		{41A04B14-0889-328C-45FF-EAA8A56AABFB} = {A435C6BF-860F-49BB-B449-1D550866B318}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED3CE6AC-5328-499C-A5CD-5B0F91C87338}
