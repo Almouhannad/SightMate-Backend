@@ -63,3 +63,12 @@ services:
     ports:
       - "9990:8080"
 
+
+  identityservice.api:
+    image: ${DOCKER_REGISTRY-}identityserviceapi
+    build:
+      context: .
+      dockerfile: IdentityService/IdentityService.API/Dockerfile
+    ports:
+      - "9989:8080" # Remove after developement
+
