@@ -76,6 +76,8 @@ services:
   identityservice.api:
     image: ${DOCKER_REGISTRY-}identityserviceapi
     container_name: identity_service_api
+    depends_on:
+      - identity_database
     build:
       context: .
       dockerfile: IdentityService/IdentityService.API/Dockerfile
