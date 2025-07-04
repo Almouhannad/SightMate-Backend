@@ -33,6 +33,7 @@ public static class DependencyInjection
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
 
+        services.AddAuthenticationFromInfrastructure();
         services.AddHttpContextAccessor();
         services.RegisterUserContextImplementationFromInfrastructure();
         return services;

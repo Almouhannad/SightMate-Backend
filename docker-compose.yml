@@ -25,6 +25,10 @@ services:
       dockerfile: VQAService/VQAService.API/Dockerfile
     env_file:
       - VQAService/.env
+    environment:
+      JWT_SECRET_KEY:    "${JWT_SECRET_KEY}"
+      JWT_ISSUER:        "${JWT_ISSUER}"
+      JWT_AUDIENCE:      "${JWT_AUDIENCE}"
   # vqaservice.api2:
   #   image: ${DOCKER_REGISTRY-}vqaserviceapi
   #   build:
