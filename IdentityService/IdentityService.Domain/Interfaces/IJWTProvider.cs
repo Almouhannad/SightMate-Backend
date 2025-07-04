@@ -5,5 +5,5 @@ namespace IdentityService.Domain.Interfaces;
 
 public interface IJWTProvider
 {
-    public Result<String> Create(User user);
+    public String Create(User user);
 }
