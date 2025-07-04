@@ -17,13 +17,21 @@ public class JWTProvider : IJWTProvider
 
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+        var claims = new List<Claim>
+        {
+            new(JwtRegisteredClaimNames.Sub,   user.Id.ToString()),
+            new(JwtRegisteredClaimNames.Email, user.Email)
+        };
+
+        claims.AddRange(
+            user.Roles.Select(r =>
+                new Claim(ClaimTypes.Role, r.Name)
+            )
+        );
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(
-            [
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email)
-            ]),
+            Subject = new ClaimsIdentity(claims),
             SigningCredentials = credentials,
             Issuer = CONFIG.JWTIssuer,
             Audience = CONFIG.JWTAudience,
