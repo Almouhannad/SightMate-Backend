@@ -1,11 +1,17 @@
+using IdentityService.Application;
 using IdentityService.Infrastructure;
+using IdentityService.Presentation;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddInfrastructure();
+builder.Services
+    .AddApplication()
+    .AddPresentation()
+    .AddInfrastructure();
 
+builder.Services.AddEndpoints();
 
 builder.Services.AddOpenApi();
 
@@ -21,6 +27,8 @@ if (app.Environment.IsDevelopment())
     });
 
     app.ApplyMigrations();
+
+    app.MapEndpoints();
 }
 
 app.MapGet("/health", () =>
@@ -28,13 +36,5 @@ app.MapGet("/health", () =>
     return new { Status = "OK" };
 })
 .WithName("Health");
-
-// For testing only (Remove later)
-//app.MapGet("/users/me", async(ClaimsPrincipal claims, ApplicationDbContext context) =>
-//{
-//    String userId = claims.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
-//    return await context.Users.FindAsync(Guid.Parse(userId));
-
-//}).RequireAuthorization();
 
 app.Run();
