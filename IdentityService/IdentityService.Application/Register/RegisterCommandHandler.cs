@@ -1,4 +1,5 @@
-﻿using IdentityService.Domain.Interfaces;
+﻿using IdentityService.Domain.Entities;
+using IdentityService.Domain.Interfaces;
 using SharedKernel.Base;
 using SharedKernel.Messaging;
 
@@ -14,6 +15,11 @@ public sealed class RegisterCommandHandler (IUserManager userManager)
         if (createUserReault.IsFailure)
         {
             return Result.Failure(createUserReault.Error);
+        }
+        var addUserRoleResult = await _userManager.AddRole(createUserReault.Value.Email, Roles.USER);
+        if (addUserRoleResult.IsFailure)
+        {
+            return Result.Failure(addUserRoleResult.Error);
         }
         return Result.Success();
     }
