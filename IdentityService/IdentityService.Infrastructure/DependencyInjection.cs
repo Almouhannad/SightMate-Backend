@@ -46,6 +46,10 @@ public static class DependencyInjection
         services.AddIdentity<UserDAO, RoleDAO>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
+        services.Scan(scan => scan.FromAssembliesOf(typeof(DependencyInjection))
+            .AddClasses(classes => classes.AssignableTo(typeof(IUserManager)), publicOnly: false)
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
         return services;
     }
 
@@ -90,7 +94,7 @@ public static class DependencyInjection
     public static IServiceCollection RegisterUserContextImplementationFromInfrastructure(this IServiceCollection services)
     {
         services.Scan(scan => scan.FromAssembliesOf(typeof(DependencyInjection))
-            .AddClasses(classes => classes.AssignableTo(typeof(IUserManager)), publicOnly: false)
+            .AddClasses(classes => classes.AssignableTo(typeof(IUserContext)), publicOnly: false)
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
         return services;
