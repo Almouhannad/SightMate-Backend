@@ -1,4 +1,5 @@
-﻿using SharedKernel.Base;
+﻿using IdentityService.Domain.Interfaces;
+using SharedKernel.Base;
 using SharedKernel.Messaging;
 using SharedKernel.Multimedia;
 using VQAService.Domain.Entities.Conversations;
@@ -12,7 +13,8 @@ namespace VQAService.Application.IC;
 
 internal sealed class ProcessICQueryHandler(
     IVQAServiceProvider serviceProvider,
-    IConversationsRepository conversationsRepository) : IQueryHandler<ProcessICQuery, ICOutput>
+    IConversationsRepository conversationsRepository,
+    IUserContext userContext) : IQueryHandler<ProcessICQuery, ICOutput>
 {
     public async Task<Result<ICOutput>> Handle(ProcessICQuery query, CancellationToken cancellationToken)
     {
@@ -55,9 +57,9 @@ internal sealed class ProcessICQueryHandler(
         #endregion
 
         #region Create conversation
-        // TODO: Handle UserId
+        // TODO: Handle UserId == DONE :D
         var history = new HistoryItem { Question = "Caption this image", Answer = icOutput };
-        Conversation conversation = new() { Id = Guid.NewGuid(), UserId = Guid.NewGuid(), Image = icInput.Image, History = [history] };
+        Conversation conversation = new() { Id = Guid.NewGuid(), UserId = userContext.UserId, Image = icInput.Image, History = [history] };
         var createConversationResult = await conversationsRepository.Create(conversation);
         if (createConversationResult.IsFailure)
         {

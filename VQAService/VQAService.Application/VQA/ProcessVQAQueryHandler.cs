@@ -6,11 +6,13 @@ using VQAService.Domain.Entities.Input.Options.Language;
 using VQAService.Domain.Entities.Output;
 using VQAService.Domain.Interfaces;
 using VQAService.Domain.Entities.Conversations;
+using IdentityService.Domain.Interfaces;
 
 namespace VQAService.Application.VQA;
 
 internal sealed class ProcessVQAQueryHandler(IVQAServiceProvider serviceProvider,
-    IConversationsRepository conversationsRepository) : IQueryHandler<ProcessVQAQuery, VQAOutput>
+    IConversationsRepository conversationsRepository,
+    IUserContext userContext) : IQueryHandler<ProcessVQAQuery, VQAOutput>
 {
     public async Task<Result<VQAOutput>> Handle(ProcessVQAQuery query, CancellationToken cancellationToken)
     {
@@ -48,6 +50,10 @@ internal sealed class ProcessVQAQueryHandler(IVQAServiceProvider serviceProvider
             return Result.Failure<VQAOutput>(getConversationResult.Error);
         }
         var conversation = getConversationResult.Value;
+        if (conversation.UserId != userContext.UserId)
+        {
+            return Result.Failure<VQAOutput>(Error.Conflict("VQA.Forbidden", "It's not allowed to access required conversation"));
+        }
         #endregion
 
         #region Perform VQA
