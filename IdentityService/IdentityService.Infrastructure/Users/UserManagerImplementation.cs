@@ -17,7 +17,7 @@ public class UserManagerImplementation(UserManager<UserDAO> userManager, RoleMan
 
     public async Task<Result<User>> Create(string firstName, string lastName, string email, string password)
     {
-        UserDAO userDAO = new() { FirstName = firstName, LastName = lastName, Email = email };
+        UserDAO userDAO = new() { FirstName = firstName, LastName = lastName, Email = email, UserName = email };
         var createUserResult = await _userManager.CreateAsync(userDAO, password);
         if (createUserResult.Succeeded)
         {
