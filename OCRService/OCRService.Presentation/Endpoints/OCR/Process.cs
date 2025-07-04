@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Routing;
 using SharedKernel.API;
 using SharedKernel.Messaging;
 using OCRService.Application.OCR;
+using OCRService.Domain.Entities.Output;
 
 namespace OCRService.Presentation.Endpoints.OCR;
 
@@ -13,7 +14,7 @@ internal sealed class ProcessOCR : IEndpoint
     {
         app.MapPost("ocr", async
             (ProcessOCRQuery query,
-            IQueryHandler<ProcessOCRQuery, ProcessOCRQueryResponse> handler,
+            IQueryHandler<ProcessOCRQuery, OCROutput> handler,
             CancellationToken cancellationToken) =>
         {
             var result = await handler.Handle(query, cancellationToken);
