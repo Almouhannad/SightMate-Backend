@@ -33,10 +33,4 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapEndpoints();
 
-app.MapGet("/health", () =>
-{
-    return new { Status = "OK" };
-})
-.WithName("Health");
-
 app.Run();

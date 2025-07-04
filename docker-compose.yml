@@ -91,8 +91,6 @@ services:
       JWT_SECRET_KEY:    "${JWT_SECRET_KEY}"
       JWT_ISSUER:        "${JWT_ISSUER}"
       JWT_AUDIENCE:      "${JWT_AUDIENCE}"
-    ports:
-      - "9989:8080" # Remove after developement 
 
   identity_database:
     image: postgres:17
