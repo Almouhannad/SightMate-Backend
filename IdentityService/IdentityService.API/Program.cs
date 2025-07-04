@@ -1,17 +1,19 @@
+using IdentityService.Application;
 using IdentityService.Infrastructure;
+using IdentityService.Presentation;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
-builder.Services.AddReverseProxy()
-    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
-
 builder.Services
-    .AddAuthenticationFromInfrastructure()
-    .AddAuthorizationFromInfrastructure();
+    .AddApplication()
+    .AddPresentation()
+    .AddInfrastructure();
+
+builder.Services.AddEndpoints();
+
+builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
@@ -23,17 +25,18 @@ if (app.Environment.IsDevelopment())
     {
         options.SwaggerEndpoint("/openapi/v1.json", "OpenAPI V1");
     });
+
+    app.ApplyMigrations();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapEndpoints();
 
 app.MapGet("/health", () =>
 {
     return new { Status = "OK" };
 })
 .WithName("Health");
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapReverseProxy();
 
 app.Run();

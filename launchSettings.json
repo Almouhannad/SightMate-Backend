@@ -6,7 +6,8 @@
       "serviceActions": {
         "ocrservice.api": "StartDebugging",
         "vqaservice.api": "StartDebugging",
-        "gateway.api": "StartDebugging"
+        "gateway.api": "StartDebugging",
+        "identityservice.api": "StartDebugging"
       }
     }
   }

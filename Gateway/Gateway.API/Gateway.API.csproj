@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.1" />
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\IdentityService\IdentityService.Infrastructure\IdentityService.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Shared\SharedKernel\SharedKernel.csproj" />
   </ItemGroup>
 
