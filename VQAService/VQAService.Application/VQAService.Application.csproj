@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\IdentityService\IdentityService.Domain\IdentityService.Domain.csproj" />
     <ProjectReference Include="..\..\Shared\SharedKernel\SharedKernel.csproj" />
     <ProjectReference Include="..\VQAService.Config\VQAService.Config.csproj" />
     <ProjectReference Include="..\VQAService.Domain\VQAService.Domain.csproj" />

@@ -3,9 +3,9 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
-using System.Text.Json;
 using VQAService.Config;
 using VQAService.Domain.Interfaces;
+using IdentityService.Infrastructure;
 
 namespace VQAService.Infrastructure;
 
@@ -32,6 +32,9 @@ public static class DependencyInjection
             .AddClasses(classes => classes.AssignableTo(typeof(IVQAServiceProvider)), publicOnly: false)
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
+
+        services.AddHttpContextAccessor();
+        services.RegisterUserContextImplementationFromInfrastructure();
         return services;
     }
 }
