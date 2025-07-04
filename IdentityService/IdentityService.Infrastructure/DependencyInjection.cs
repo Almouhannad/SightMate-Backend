@@ -28,10 +28,8 @@ public static class DependencyInjection
             .AddClasses(classes => classes.AssignableTo(typeof(IJWTProvider)), publicOnly: false)
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
-        services.Scan(scan => scan.FromAssembliesOf(typeof(DependencyInjection))
-            .AddClasses(classes => classes.AssignableTo(typeof(IUserContext)), publicOnly: false)
-                .AsImplementedInterfaces()
-                .WithScopedLifetime());
+
+        services.RegisterUserContextImplementationFromInfrastructure();
         return services;
     }
     public static IServiceCollection AddDbContextFromInfrastructure(this IServiceCollection services)
@@ -48,11 +46,6 @@ public static class DependencyInjection
         services.AddIdentity<UserDAO, RoleDAO>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
-
-        services.Scan(scan => scan.FromAssembliesOf(typeof(DependencyInjection))
-            .AddClasses(classes => classes.AssignableTo(typeof(IUserManager)), publicOnly: false)
-                .AsImplementedInterfaces()
-                .WithScopedLifetime());
         return services;
     }
 
@@ -92,6 +85,14 @@ public static class DependencyInjection
                 policy.RequireRole(Roles.ADMIN.Name);
             });
         });
+        return services;
+    }
+    public static IServiceCollection RegisterUserContextImplementationFromInfrastructure(this IServiceCollection services)
+    {
+        services.Scan(scan => scan.FromAssembliesOf(typeof(DependencyInjection))
+            .AddClasses(classes => classes.AssignableTo(typeof(IUserManager)), publicOnly: false)
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
         return services;
     }
     public static void ApplyMigrations(this IApplicationBuilder app)
