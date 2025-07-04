@@ -27,9 +27,11 @@ if (app.Environment.IsDevelopment())
     });
 
     app.ApplyMigrations();
-
-    app.MapEndpoints();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapEndpoints();
 
 app.MapGet("/health", () =>
 {
