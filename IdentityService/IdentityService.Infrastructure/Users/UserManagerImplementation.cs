@@ -39,6 +39,18 @@ public class UserManagerImplementation(UserManager<UserDAO> userManager, RoleMan
         return userDAO.ToDomain();
     }
 
+    public async Task<Result<User>> FindById(Guid id)
+    {
+        var userDAO = await _userManager.FindByIdAsync(id.ToString());
+        if (userDAO == null)
+        {
+            return Result.Failure<User>(UserErrors.NotFoundByEmail);
+        }
+        var roles = await _userManager.GetRolesAsync(userDAO);
+        userDAO.Roles = [.. roles];
+        return userDAO.ToDomain();
+    }
+
     public async Task<Result<bool>> CheckPassword(String email, string password)
     {
         var userDAO = await _userManager.FindByEmailAsync(email);

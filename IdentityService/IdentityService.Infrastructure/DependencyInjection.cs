@@ -1,4 +1,5 @@
 ﻿using IdentityService.Config;
+using IdentityService.Domain.Entities;
 using IdentityService.Domain.Interfaces;
 using IdentityService.Infrastructure.Users;
 using IdentityService.Infrastructure.Users.DAOs;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 using System.Text;
 
 namespace IdentityService.Infrastructure;
@@ -24,6 +26,10 @@ public static class DependencyInjection
 
         services.Scan(scan => scan.FromAssembliesOf(typeof(DependencyInjection))
             .AddClasses(classes => classes.AssignableTo(typeof(IJWTProvider)), publicOnly: false)
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
+        services.Scan(scan => scan.FromAssembliesOf(typeof(DependencyInjection))
+            .AddClasses(classes => classes.AssignableTo(typeof(IUserContext)), publicOnly: false)
                 .AsImplementedInterfaces()
                 .WithScopedLifetime());
         return services;
@@ -70,7 +76,8 @@ public static class DependencyInjection
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = CONFIG.JWTIssuer,
                 ValidAudience = CONFIG.JWTAudience,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(CONFIG.JWTSecretKey))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(CONFIG.JWTSecretKey)),
+                RoleClaimType = ClaimTypes.Role
             };
         });
         return services;
@@ -78,7 +85,13 @@ public static class DependencyInjection
 
     public static IServiceCollection AddAuthorizationFromInfrastructure(this IServiceCollection services)
     {
-        services.AddAuthorization();
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("AdminOnly", policy =>
+            {
+                policy.RequireRole(Roles.ADMIN.Name);
+            });
+        });
         return services;
     }
     public static void ApplyMigrations(this IApplicationBuilder app)
