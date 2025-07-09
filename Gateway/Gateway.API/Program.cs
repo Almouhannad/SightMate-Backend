@@ -1,10 +1,26 @@
 using IdentityService.Infrastructure;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddRateLimiter(options =>
+{
+    // fixed-window policy
+    options.AddFixedWindowLimiter("rateLimitingStandardPolicy", opts =>
+    {
+        opts.PermitLimit = 5;
+        opts.Window = TimeSpan.FromSeconds(15);
+        // 5 requests every 15 seconds
+        opts.QueueLimit = 2; // Requests to be delayrd
+        opts.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+    });
+});
+
 
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
@@ -34,6 +50,7 @@ app.MapGet("/health", () =>
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseRateLimiter();
 app.MapReverseProxy();
 
 app.Run();
