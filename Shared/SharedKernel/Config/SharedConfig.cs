@@ -1,15 +1,13 @@
-﻿using SharedKernel.Config;
+﻿namespace SharedKernel.Config;
 
-namespace Gateway.API.Configurations;
-
-public static class CONFIG
+public static class SHARED_CONFIG
 {
-    // Env-var names
     private const string JWTSecretKeyVar = "JWT_SECRET_KEY";
     private const string JWTIssuerVar = "JWT_ISSUER";
     private const string JWTAudienceVar = "JWT_AUDIENCE";
+    private const string SeqServerVar = "SEQ_SERVER";
 
-    // Lazy, exception-safe properties
+
     private static readonly Lazy<String> _jwtSecretKey = new(() => ENVHelper.GetEnv(JWTSecretKeyVar));
     public static String JWTSecretKey => _jwtSecretKey.Value;
 
@@ -19,4 +17,6 @@ public static class CONFIG
     private static readonly Lazy<String> _jwtAudience = new(() => ENVHelper.GetEnv(JWTAudienceVar));
     public static String JWTAudience => _jwtAudience.Value;
 
+    private static readonly Lazy<Uri> _seqServer = new(() => ENVHelper.ParseUri(SeqServerVar));
+    public static Uri SeqServer => _seqServer.Value;
 }

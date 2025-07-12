@@ -3,6 +3,7 @@ using IdentityService.Domain.Entities;
 using IdentityService.Domain.Interfaces;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
+using SharedKernel.Config;
 using System.Security.Claims;
 using System.Text;
 
@@ -12,7 +13,7 @@ public class JWTProvider : IJWTProvider
 {
     public string Create(User user)
     {
-        string secretKey = CONFIG.JWTSecretKey;
+        string secretKey = SHARED_CONFIG.JWTSecretKey;
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
 
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -33,8 +34,8 @@ public class JWTProvider : IJWTProvider
         {
             Subject = new ClaimsIdentity(claims),
             SigningCredentials = credentials,
-            Issuer = CONFIG.JWTIssuer,
-            Audience = CONFIG.JWTAudience,
+            Issuer = SHARED_CONFIG.JWTIssuer,
+            Audience = SHARED_CONFIG.JWTAudience,
         };
 
         var handler = new JsonWebTokenHandler();
