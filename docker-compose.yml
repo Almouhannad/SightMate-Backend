@@ -115,3 +115,14 @@ services:
   #     - "5050:80"
   #   depends_on:
   #     - identity_database
+
+# LOGGING SERVER
+  seq:
+    image: datalust/seq:2024.3
+    container_name: logging_server
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "8081:80"
+    volumes:
+      - ./.docker/seq-data:/data
