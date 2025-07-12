@@ -8,6 +8,8 @@ services:
       dockerfile: OCRService/OCRService.API/Dockerfile
     env_file:
       - OCRService/.env
+    environment:
+      SEQ_SERVER: "${SEQ_SERVER}"
   # ocrservice.api2:
   #   image: ${DOCKER_REGISTRY-}ocrserviceapi
   #   build:
@@ -29,6 +31,7 @@ services:
       JWT_SECRET_KEY:    "${JWT_SECRET_KEY}"
       JWT_ISSUER:        "${JWT_ISSUER}"
       JWT_AUDIENCE:      "${JWT_AUDIENCE}"
+      SEQ_SERVER:        "${SEQ_SERVER}"
   # vqaservice.api2:
   #   image: ${DOCKER_REGISTRY-}vqaserviceapi
   #   build:
@@ -77,6 +80,7 @@ services:
       JWT_SECRET_KEY:    "${JWT_SECRET_KEY}"
       JWT_ISSUER:        "${JWT_ISSUER}"
       JWT_AUDIENCE:      "${JWT_AUDIENCE}"
+      SEQ_SERVER:        "${SEQ_SERVER}"
     ports:
       - "9990:8080"
 
@@ -95,6 +99,7 @@ services:
       JWT_SECRET_KEY:    "${JWT_SECRET_KEY}"
       JWT_ISSUER:        "${JWT_ISSUER}"
       JWT_AUDIENCE:      "${JWT_AUDIENCE}"
+      SEQ_SERVER:        "${SEQ_SERVER}"
 
   identity_database:
     image: postgres:17

@@ -1,9 +1,10 @@
 using IdentityService.Infrastructure;
 using Microsoft.AspNetCore.RateLimiting;
+using SharedKernel.Logging;
 using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Host.RegisterSerilogWithSeq("gateway");
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -30,7 +31,7 @@ builder.Services
     .AddAuthorizationFromInfrastructure();
 
 var app = builder.Build();
-
+app.UseSerilogWithSeq();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

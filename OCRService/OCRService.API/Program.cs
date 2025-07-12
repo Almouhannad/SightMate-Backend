@@ -1,11 +1,13 @@
 using OCRService.Application;
 using OCRService.Infrastructure;
 using OCRService.Presentation;
+using SharedKernel.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Host.RegisterSerilogWithSeq("ocr");
 builder.Services
     .AddInfrastructure()
     .AddApplication()
@@ -17,6 +19,7 @@ builder.Services.AddEndpoints();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+app.UseSerilogWithSeq();
 app.UseExceptionHandler();
 app.MapEndpoints();
 
