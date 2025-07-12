@@ -1,5 +1,5 @@
 @Gateway.API_HostAddress = http://localhost:9990
-@AccessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJTaWdodE1hdGUuTW9iaWxlQXBwLmhpYXN0LmVkeS5zeSIsImlzcyI6IlNpZ2h0TWF0ZS5JZGVudGl0eVNlcnZpY2UuaGlhc3QuZWR5LnN5Iiwic3ViIjoiMDE5N2Q0Y2UtMTA3ZC03OGY0LTg2OWItN2NkMjc5NjFiNzczIiwiZW1haWwiOiJhbG1vaGFuYWQuaGFmZXpAaGlhc3QuZWR1LnN5IiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVVNFUiIsImV4cCI6MTc1MTYzMDE0NiwiaWF0IjoxNzUxNjI2NTQ2LCJuYmYiOjE3NTE2MjY1NDZ9.kuqFkXNaASpUPfoR3-86bFz4wkt_5F8yRK0c-Y6CU-s
+@AccessToken = ''
 
 GET {{Gateway.API_HostAddress}}/health/
 Accept: application/json
@@ -18,3 +18,11 @@ Authorization: Bearer {{AccessToken}}
 GET {{Gateway.API_HostAddress}}/identity-api/profile
 Accept: application/json
 Authorization: Bearer {{AccessToken}}
+
+###
+POST {{Gateway.API_HostAddress}}/identity-api/login
+Content-Type: application/json
+{
+    "email": "",
+    "password": ""
+}
