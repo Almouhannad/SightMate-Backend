@@ -131,3 +131,19 @@ services:
       - "8081:80"
     volumes:
       - ./.docker/seq-data:/data
+
+  admin-dashboard:
+    build:
+      context: ./admin-dashboard
+      dockerfile: Dockerfile
+    image: sightmate-admin-dashboard
+    container_name: admin_dashboard
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./admin-dashboard:/app
+      - admin_dashboard_node_modules:/app/node_modules
+
+volumes:
+  admin_dashboard_node_modules:
+
