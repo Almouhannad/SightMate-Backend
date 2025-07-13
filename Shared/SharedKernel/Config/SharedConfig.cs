@@ -5,6 +5,7 @@ public static class SHARED_CONFIG
     private const string JWTSecretKeyVar = "JWT_SECRET_KEY";
     private const string JWTIssuerVar = "JWT_ISSUER";
     private const string JWTAudienceVar = "JWT_AUDIENCE";
+    private const string JWTExpirationHoursVar = "JWT_EXPIRATION_HOURS";
     private const string SeqServerVar = "SEQ_SERVER";
 
 
@@ -16,6 +17,8 @@ public static class SHARED_CONFIG
 
     private static readonly Lazy<String> _jwtAudience = new(() => ENVHelper.GetEnv(JWTAudienceVar));
     public static String JWTAudience => _jwtAudience.Value;
+    private static readonly Lazy<String> _jwtExpirationHours = new(() => ENVHelper.GetEnv(JWTExpirationHoursVar));
+    public static int JWTExpirationHours => int.Parse(_jwtExpirationHours.Value);
 
     private static readonly Lazy<Uri> _seqServer = new(() => ENVHelper.ParseUri(SeqServerVar));
     public static Uri SeqServer => _seqServer.Value;

@@ -96,10 +96,11 @@ services:
     env_file:
       - IdentityService/.env
     environment:
-      JWT_SECRET_KEY:    "${JWT_SECRET_KEY}"
-      JWT_ISSUER:        "${JWT_ISSUER}"
-      JWT_AUDIENCE:      "${JWT_AUDIENCE}"
-      SEQ_SERVER:        "${SEQ_SERVER}"
+      JWT_SECRET_KEY:       "${JWT_SECRET_KEY}"
+      JWT_ISSUER:           "${JWT_ISSUER}"
+      JWT_AUDIENCE:         "${JWT_AUDIENCE}"
+      JWT_EXPIRATION_HOURS: "${JWT_EXPIRATION_HOURS}"
+      SEQ_SERVER:           "${SEQ_SERVER}"
 
   identity_database:
     image: postgres:17

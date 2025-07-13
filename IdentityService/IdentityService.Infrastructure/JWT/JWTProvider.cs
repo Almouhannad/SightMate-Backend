@@ -36,6 +36,7 @@ public class JWTProvider : IJWTProvider
             SigningCredentials = credentials,
             Issuer = SHARED_CONFIG.JWTIssuer,
             Audience = SHARED_CONFIG.JWTAudience,
+            Expires = DateTime.UtcNow.AddHours(SHARED_CONFIG.JWTExpirationHours),
         };
 
         var handler = new JsonWebTokenHandler();
