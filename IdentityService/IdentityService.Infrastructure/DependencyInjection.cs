@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using SharedKernel.Config;
 using System.Security.Claims;
 using System.Text;
 
@@ -71,9 +72,9 @@ public static class DependencyInjection
                 ValidateAudience = true,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = CONFIG.JWTIssuer,
-                ValidAudience = CONFIG.JWTAudience,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(CONFIG.JWTSecretKey)),
+                ValidIssuer = SHARED_CONFIG.JWTIssuer,
+                ValidAudience = SHARED_CONFIG.JWTAudience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SHARED_CONFIG.JWTSecretKey)),
                 RoleClaimType = ClaimTypes.Role
             };
         });
