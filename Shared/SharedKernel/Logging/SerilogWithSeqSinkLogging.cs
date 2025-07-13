@@ -12,7 +12,7 @@ public static class SerilogWithSeqSinkLogging
         {
             loggingContext
             .Enrich.FromLogContext()
-            .Enrich.WithProperty("sevice_name", serviceName)
+            .Enrich.WithProperty("service_name", serviceName)
             .WriteTo.Seq(SHARED_CONFIG.SeqServer.ToString());
         });
         return host;
