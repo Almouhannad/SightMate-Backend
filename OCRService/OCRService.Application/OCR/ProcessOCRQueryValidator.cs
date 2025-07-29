@@ -4,7 +4,7 @@ using OCRService.Domain.Entities.Input.Options.Model;
 
 namespace OCRService.Application.OCR;
 
-internal sealed class ProcessOCRQueryValidator : AbstractValidator<ProcessOCRQuery>
+public sealed class ProcessOCRQueryValidator : AbstractValidator<ProcessOCRQuery>
 {
     public ProcessOCRQueryValidator()
     {

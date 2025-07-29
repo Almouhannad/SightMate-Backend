@@ -1,7 +1,7 @@
 ﻿using OCRService.Domain.Entities.Output;
 using System.Text.Json;
 
-internal sealed class OCROutputDTO
+public sealed class OCROutputDTO
 {
     public OcrTextBlockDto[] Texts { get; set; } = [];
 

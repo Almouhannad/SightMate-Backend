@@ -9,7 +9,7 @@ using SharedKernel.Multimedia;
 
 namespace OCRService.Application.OCR;
 
-internal sealed class ProcessOCRQueryHandler(IOCRServiceProvider serviceProvider) : IQueryHandler<ProcessOCRQuery, OCROutput>
+public sealed class ProcessOCRQueryHandler(IOCRServiceProvider serviceProvider) : IQueryHandler<ProcessOCRQuery, OCROutput>
 {
     public async Task<Result<OCROutput>> Handle(ProcessOCRQuery query, CancellationToken cancellationToken)
     {

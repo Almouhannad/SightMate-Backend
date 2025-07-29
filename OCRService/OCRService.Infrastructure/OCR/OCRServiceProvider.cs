@@ -25,9 +25,10 @@ public class OCRServiceProvider : IOCRServiceProvider
         DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
     };
 
-    public OCRServiceProvider()
+    public OCRServiceProvider(HttpClient httpClient)
     {
-        _http = new HttpClient { BaseAddress = _ocrServiceApiBaseUri };
+        _http = httpClient;
+        _http.BaseAddress = _ocrServiceApiBaseUri;
         _http.DefaultRequestHeaders.Add("X-API-Key", _ocrServiceApiKey);
     }
     public async Task<bool> IsAvailable()
