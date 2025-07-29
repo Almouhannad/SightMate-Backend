@@ -64,6 +64,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService.Presentation", "IdentityService\IdentityService.Presentation\IdentityService.Presentation.csproj", "{D3E51706-FDC2-7D08-CB65-C9A986EF67DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCRService.Tests", "OCRService\OCRService.Tests\OCRService.Tests.csproj", "{D26E7350-AFA8-E85F-C06B-0136FA369879}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -154,6 +156,10 @@ Global
 		{D3E51706-FDC2-7D08-CB65-C9A986EF67DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3E51706-FDC2-7D08-CB65-C9A986EF67DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3E51706-FDC2-7D08-CB65-C9A986EF67DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D26E7350-AFA8-E85F-C06B-0136FA369879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D26E7350-AFA8-E85F-C06B-0136FA369879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D26E7350-AFA8-E85F-C06B-0136FA369879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D26E7350-AFA8-E85F-C06B-0136FA369879}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -179,6 +185,7 @@ Global
 		{F5150E0E-CDEF-D9C1-8BCB-7EB6E889992E} = {A435C6BF-860F-49BB-B449-1D550866B318}
 		{5C33C9F5-72CB-B684-B09E-65FA251E74E4} = {A435C6BF-860F-49BB-B449-1D550866B318}
 		{D3E51706-FDC2-7D08-CB65-C9A986EF67DF} = {A435C6BF-860F-49BB-B449-1D550866B318}
+		{D26E7350-AFA8-E85F-C06B-0136FA369879} = {F6DB53EF-671E-4EBD-AE62-409BB592657B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED3CE6AC-5328-499C-A5CD-5B0F91C87338}
