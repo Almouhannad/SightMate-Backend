@@ -11,7 +11,7 @@ using VQAService.Domain.Interfaces;
 
 namespace VQAService.Application.IC;
 
-internal sealed class ProcessICQueryHandler(
+public sealed class ProcessICQueryHandler(
     IVQAServiceProvider serviceProvider,
     IConversationsRepository conversationsRepository,
     IUserContext userContext) : IQueryHandler<ProcessICQuery, ICOutput>

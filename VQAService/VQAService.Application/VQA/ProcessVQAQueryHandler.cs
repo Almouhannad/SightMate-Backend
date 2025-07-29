@@ -10,7 +10,7 @@ using IdentityService.Domain.Interfaces;
 
 namespace VQAService.Application.VQA;
 
-internal sealed class ProcessVQAQueryHandler(IVQAServiceProvider serviceProvider,
+public sealed class ProcessVQAQueryHandler(IVQAServiceProvider serviceProvider,
     IConversationsRepository conversationsRepository,
     IUserContext userContext) : IQueryHandler<ProcessVQAQuery, VQAOutput>
 {

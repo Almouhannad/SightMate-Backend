@@ -4,7 +4,7 @@ using VQAService.Domain.Entities.Input.Options.Model;
 
 namespace VQAService.Application.VQA;
 
-internal sealed class ProcessVQAQueryValidator : AbstractValidator<ProcessVQAQuery>
+public sealed class ProcessVQAQueryValidator : AbstractValidator<ProcessVQAQuery>
 {
     public ProcessVQAQueryValidator()
     {
