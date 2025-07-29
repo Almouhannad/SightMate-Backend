@@ -11,7 +11,7 @@ public class LoginQueryHandler (IUserManager userManager, IJWTProvider jwtProvid
     private readonly IUserManager _userManager = userManager;
     private readonly IJWTProvider _jwtProvider = jwtProvider;
 
-    async Task<Result<LoginQueryResponse>> IQueryHandler<LoginQuery, LoginQueryResponse>.Handle(LoginQuery query, CancellationToken cancellationToken)
+    public async Task<Result<LoginQueryResponse>> Handle(LoginQuery query, CancellationToken cancellationToken)
     {
         var checkPasswordResult = await _userManager.CheckPassword(query.Email, query.Password);
         if (checkPasswordResult.IsFailure)
