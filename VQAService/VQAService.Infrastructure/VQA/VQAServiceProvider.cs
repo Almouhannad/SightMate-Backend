@@ -29,7 +29,8 @@ public class VQAServiceProvider : IVQAServiceProvider
     public VQAServiceProvider(HttpClient httpClient)
     {
         _http = httpClient;
-        _http = new HttpClient { BaseAddress = _ocrServiceApiBaseUri };
+        //_http = new HttpClient { BaseAddress = _ocrServiceApiBaseUri }; What a stupid mistake
+        _http.BaseAddress = _ocrServiceApiBaseUri;
         _http.DefaultRequestHeaders.Add("X-API-Key", _ocrServiceApiKey);
     }
 

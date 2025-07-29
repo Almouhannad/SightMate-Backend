@@ -16,7 +16,7 @@ namespace OCRService.Tests.Infrastructure.OCR
         private readonly Mock<HttpMessageHandler> _mockHttpMessageHandler;
         private readonly HttpClient _httpClient;
         private readonly OCRServiceProvider _ocrServiceProvider;
-        private readonly Uri _endpointUri = new("http://localhost:9901/");
+        private readonly Uri _endpointUri = new("http://mock_endpoint/");
 
         public OCRServiceProviderTests()
         {
@@ -25,8 +25,9 @@ namespace OCRService.Tests.Infrastructure.OCR
             {
                 BaseAddress = _endpointUri
             };
-            // Important note: Testing will run on windows, so environment variables won't be loaded
-            // So, go to ServiceProvider and comment loading endpoint from config to prevent CONFIG exceptions
+            Environment.SetEnvironmentVariable("OCR_SERVICE_BASE_URI", _endpointUri.OriginalString);
+            Environment.SetEnvironmentVariable("OCR_SERVICE_API_KEY", "Hello, I'm a mock key");
+
             _ocrServiceProvider = new OCRServiceProvider(_httpClient);
         }
 

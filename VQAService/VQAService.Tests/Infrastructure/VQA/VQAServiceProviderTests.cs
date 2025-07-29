@@ -1,6 +1,5 @@
 ﻿using Moq;
 using Moq.Protected;
-using SharedKernel.Base;
 using SharedKernel.Multimedia;
 using System.Net;
 using System.Text;
@@ -17,16 +16,18 @@ public class VQAServiceProviderTests
     private readonly Mock<HttpMessageHandler> _mockHttpMessageHandler;
     private readonly HttpClient _httpClient;
     private readonly VQAServiceProvider _vqaServiceProvider;
+    private readonly Uri _endpointUri = new("http://mock_endpoint/");
 
     public VQAServiceProviderTests()
     {
         _mockHttpMessageHandler = new Mock<HttpMessageHandler>();
-        _httpClient = new HttpClient(_mockHttpMessageHandler.Object);
-        // For testing, we can set a dummy base address and ensure the HttpClient mock handles it.
-        _httpClient.BaseAddress = new Uri("http://dummy-vqa-service.com/");
-        _httpClient.DefaultRequestHeaders.Add("X-API-Key", "dummy_api_key");
-        // Important note: Testing will run on windows, so environment variables won't be loaded
-        // So, go to ServiceProvider and comment loading endpoint from config to prevent CONFIG exceptions
+        _httpClient = new HttpClient(_mockHttpMessageHandler.Object)
+        {
+            BaseAddress = _endpointUri
+        };
+        Environment.SetEnvironmentVariable("VQA_SERVICE_BASE_URI", _endpointUri.OriginalString);
+        Environment.SetEnvironmentVariable("VQA_SERVICE_API_KEY", "Hello, I'm a mock key");
+
         _vqaServiceProvider = new VQAServiceProvider(_httpClient);
     }
 
@@ -54,7 +55,7 @@ public class VQAServiceProviderTests
             .Protected()
             .Setup<Task<HttpResponseMessage>>(
                 "SendAsync",
-                ItExpr.Is<HttpRequestMessage>(req => req.RequestUri == new Uri(_httpClient.BaseAddress!, "health")),
+                ItExpr.Is<HttpRequestMessage>(req => req.RequestUri == new Uri(_endpointUri, "health")),
                 ItExpr.IsAny<CancellationToken>()
             )
             .ReturnsAsync(CreateHttpResponse(HttpStatusCode.OK, new { status = "ok" }));
@@ -74,7 +75,7 @@ public class VQAServiceProviderTests
             .Protected()
             .Setup<Task<HttpResponseMessage>>(
                 "SendAsync",
-                ItExpr.Is<HttpRequestMessage>(req => req.RequestUri == new Uri(_httpClient.BaseAddress!, "health")),
+                ItExpr.Is<HttpRequestMessage>(req => req.RequestUri == new Uri(_endpointUri, "health")),
                 ItExpr.IsAny<CancellationToken>()
             )
             .ReturnsAsync(CreateHttpResponse(HttpStatusCode.OK, new { status = "error" }));
@@ -137,7 +138,7 @@ public class VQAServiceProviderTests
             .Setup<Task<HttpResponseMessage>>(
                 "SendAsync",
                 ItExpr.Is<HttpRequestMessage>(req =>
-                    req.RequestUri == new Uri(_httpClient.BaseAddress!, "vqa/captioning") &&
+                    req.RequestUri == new Uri(_endpointUri, "vqa/captioning") &&
                     req.Method == HttpMethod.Post
                 ),
                 ItExpr.IsAny<CancellationToken>()
@@ -211,7 +212,7 @@ public class VQAServiceProviderTests
             .Setup<Task<HttpResponseMessage>>(
                 "SendAsync",
                 ItExpr.Is<HttpRequestMessage>(req =>
-                    req.RequestUri == new Uri(_httpClient.BaseAddress!, "vqa/question") &&
+                    req.RequestUri == new Uri(_endpointUri, "vqa/question") &&
                     req.Method == HttpMethod.Post
                 ),
                 ItExpr.IsAny<CancellationToken>()
