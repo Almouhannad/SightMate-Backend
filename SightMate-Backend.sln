@@ -68,6 +68,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OCRService.Tests", "OCRServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VQAService.Tests", "VQAService\VQAService.Tests\VQAService.Tests.csproj", "{62ADC1FF-5B90-4260-8B8A-C7FF2D7D1BC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityService.Tests", "IdentityService\IdentityService.Tests\IdentityService.Tests.csproj", "{185B565C-3D33-2ABC-2906-8E49A960907B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -166,6 +168,10 @@ Global
 		{62ADC1FF-5B90-4260-8B8A-C7FF2D7D1BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62ADC1FF-5B90-4260-8B8A-C7FF2D7D1BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62ADC1FF-5B90-4260-8B8A-C7FF2D7D1BC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{185B565C-3D33-2ABC-2906-8E49A960907B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{185B565C-3D33-2ABC-2906-8E49A960907B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{185B565C-3D33-2ABC-2906-8E49A960907B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{185B565C-3D33-2ABC-2906-8E49A960907B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,6 +199,7 @@ Global
 		{D3E51706-FDC2-7D08-CB65-C9A986EF67DF} = {A435C6BF-860F-49BB-B449-1D550866B318}
 		{D26E7350-AFA8-E85F-C06B-0136FA369879} = {F6DB53EF-671E-4EBD-AE62-409BB592657B}
 		{62ADC1FF-5B90-4260-8B8A-C7FF2D7D1BC8} = {D373E46E-FAC0-4EE1-B45A-6BD7E582E7C5}
+		{185B565C-3D33-2ABC-2906-8E49A960907B} = {A435C6BF-860F-49BB-B449-1D550866B318}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED3CE6AC-5328-499C-A5CD-5B0F91C87338}
