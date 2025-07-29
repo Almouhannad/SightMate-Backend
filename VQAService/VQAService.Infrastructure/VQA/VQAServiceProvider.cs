@@ -26,8 +26,9 @@ public class VQAServiceProvider : IVQAServiceProvider
         DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
     };
 
-    public VQAServiceProvider()
+    public VQAServiceProvider(HttpClient httpClient)
     {
+        _http = httpClient;
         _http = new HttpClient { BaseAddress = _ocrServiceApiBaseUri };
         _http.DefaultRequestHeaders.Add("X-API-Key", _ocrServiceApiKey);
     }

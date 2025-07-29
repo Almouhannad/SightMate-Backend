@@ -3,9 +3,9 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace VQAService.Infrastructure.Conversations.DAOs;
 
-internal class ConversationsDAOs
+public class ConversationsDAOs
 {
-    internal class ImageDAO
+    public class ImageDAO
     {
         [BsonElement("Bytes")]
         public List<int> Bytes { get; set; } = null!;
@@ -14,7 +14,7 @@ internal class ConversationsDAOs
         public BsonDocument? Metadata { get; set; }
     }
 
-    internal class HistoryItemDAO
+    public class HistoryItemDAO
     {
         [BsonElement("Question")]
         public string Question { get; set; } = null!;
@@ -23,7 +23,7 @@ internal class ConversationsDAOs
         public string Answer { get; set; } = null!;
     }
 
-    internal class ConversationDAO
+    public class ConversationDAO
     {
         [BsonId]
         public Guid Id { get; set; }
