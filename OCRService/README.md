@@ -84,4 +84,4 @@ The `OCRService.Tests` project contains automated tests to ensure the correctnes
 
 The `OCRService` relies on environment variables for configurations of connecting to the external OCR service. These variables are accessed through the `OCRService.Config` project. Please see [.env.examples](./.env.example) for details.
 
-- OCR Service api variables must match the [SightMate.OCR_Service](../../SightMate.OCR_Service/) project
+- OCR Service api variables must match the [SightMate.OCR_Service](https://github.com/Almouhannad/SightMate-OCR-Service) project

@@ -76,5 +76,5 @@ The `VQAService.Tests` project contains automated tests to ensure the correctnes
 
 The `VQAService` relies on environment variables for configurations related to connecting to the external VQA/IC services and MongoDB. These variables are accessed through the `VQAService.Config` project. Please see [.env.example](./.env.example) for details.
 
-- Variables related to VQA microservice connection must match [VQAService](../../SightMate.VQA_Service) project.
+- Variables related to VQA microservice connection must match [VQAService](https://github.com/Almouhannad/SightMate-VQA-Service) project.
 - Variables related to mongodb connection must match [docker-compose](../docker-compose.yml) file.
