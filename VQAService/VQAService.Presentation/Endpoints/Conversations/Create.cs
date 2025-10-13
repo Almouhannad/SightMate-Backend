@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using SharedKernel.API;
+using SharedKernel.Base;
 using SharedKernel.Messaging;
 using VQAService.Application.Conversations.Create;
 
@@ -17,7 +18,7 @@ internal sealed class CreateConversation : IEndpoint
             CancellationToken cancellationToken) =>
         {
             var result = await handler.Handle(query, cancellationToken);
-            return result.Match(Results.Created, CustomResults.Problem);
+            return result.Match(Results.Ok, CustomResults.Problem);
         })
             .WithTags(Tags.CONVERSATIONS);
     }
