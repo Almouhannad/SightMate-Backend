@@ -19,8 +19,6 @@ public sealed class ProcessICQueryHandler(
     public async Task<Result<ICOutput>> Handle(ProcessICQuery query, CancellationToken cancellationToken)
     {
         #region Process inputs
-        var image = new Image { Bytes = query.ImageBytes, Metadata = query.ImageMetadata };
-
         var options = new VQAOptions();
         options.Model = query.Model ?? options.Model;
         if (query.LanguageCode is not null &&
@@ -29,7 +27,7 @@ public sealed class ProcessICQueryHandler(
             options.Language = lang;
         }
 
-        var createInputResult = ICInput.Create(image, options);
+        var createInputResult = ICInput.Create(query.ConversationId, options);
         if (createInputResult.IsFailure)
         {
             return Result.Failure<ICOutput>(createInputResult.Error);
@@ -47,8 +45,21 @@ public sealed class ProcessICQueryHandler(
         }
         #endregion
 
+        #region Get Conversation
+        var getConversationResult = await conversationsRepository.GetById(icInput.ConversationId);
+        if (getConversationResult.IsFailure)
+        {
+            return Result.Failure<ICOutput>(getConversationResult.Error);
+        }
+        var conversation = getConversationResult.Value;
+        if (conversation.UserId != userContext.UserId)
+        {
+            return Result.Failure<ICOutput>(Error.Conflict("VQA.Forbidden", "It's not allowed to access required conversation"));
+        }
+        #endregion
+
         #region Perform IC
-        var processICResult = await serviceProvider.ProcessIC(icInput.Image);
+        var processICResult = await serviceProvider.ProcessIC(conversation.Image);
         if (processICResult.IsFailure)
         {
             return Result.Failure<ICOutput>(processICResult.Error);
@@ -56,17 +67,14 @@ public sealed class ProcessICQueryHandler(
         var icOutput = processICResult.Value;
         #endregion
 
-        #region Create conversation
-        // TODO: Handle UserId == DONE :D
-        var history = new HistoryItem { Question = "Caption this image", Answer = icOutput };
-        Conversation conversation = new() { Id = Guid.NewGuid(), UserId = userContext.UserId, Image = icInput.Image, History = [history] };
-        var createConversationResult = await conversationsRepository.Create(conversation);
-        if (createConversationResult.IsFailure)
+        #region Update conversation
+        var newHistory = conversation.History;
+        newHistory.Add(new HistoryItem { Question = "Caption this image", Answer = icOutput });
+        var updateConversationHistoryResult = await conversationsRepository.UpdateHistory(conversation, newHistory);
+        if (updateConversationHistoryResult.IsFailure)
         {
-            return Result.Failure<ICOutput>(createConversationResult.Error);
-
+            return Result.Failure<ICOutput>(updateConversationHistoryResult.Error);
         }
-        conversation = createConversationResult.Value;
         #endregion
 
         var result = new ICOutput { Caption = icOutput, ConversationId = conversation.Id };

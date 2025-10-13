@@ -3,6 +3,4 @@ using VQAService.Domain.Entities.Output;
 
 namespace VQAService.Application.IC;
 
-public sealed record ProcessICQuery(
-    List<int> ImageBytes, Dictionary<String, Object>? ImageMetadata,
-    String? LanguageCode, String? Model) : IQuery<ICOutput>;
+public sealed record ProcessICQuery(Guid ConversationId, String? LanguageCode, String? Model) : IQuery<ICOutput>;
